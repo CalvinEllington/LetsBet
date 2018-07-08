@@ -1,36 +1,15 @@
 # letsbet
 
-FIXME: description
+Clojure challenge for letsbet
 
 ## Installation
 
-Download from http://example.com/FIXME.
+requires leiningen with clojure1.8
 
 ## Usage
 
-FIXME: explanation
-
-    $ java -jar letsbet-0.1.0-standalone.jar [args]
+`lein run example.obj`
 
 ## Options
 
-FIXME: listing of options this app accepts.
-
-## Examples
-
-...
-
-### Bugs
-
-...
-
-### Any Other Sections
-### That You Think
-### Might be Useful
-
-## License
-
-Copyright © 2018 FIXME
-
-Distributed under the Eclipse Public License either version 1.0 or (at
-your option) any later version.
+You can name the .obj file whatever you like, I've been passing the argument to `lein run` without quotes
