@@ -25,8 +25,14 @@
           (def filtered (into [] (remove #{"v"} lineparse)))
           (swap! vertices_ conj
           (if (get filtered 3)
-            (sorted-map :w (get filtered 3) :x (get filtered 0) :y (get filtered 1) :z (get filtered 2))
-            (sorted-map :w 1.0 :x (get filtered 0) :y (get filtered 1) :z (get filtered 2)))
+            (sorted-map :w (read-string (get filtered 3))
+            :x (read-string (get filtered 0))
+            :y (read-string (get filtered 1))
+            :z (read-string (get filtered 2)))
+            (sorted-map :w 1.0
+            :x (read-string (get filtered 0))
+            :y (read-string (get filtered 1))
+            :z (read-string (get filtered 2))))
           ))
 
         ; :texture-coords
@@ -35,8 +41,12 @@
           (def filtered (into [] (remove #{"vt"} lineparse)))
           (swap! texturecoords_ conj
           (if (get filtered 2)
-            (sorted-map :w (get filtered 2) :u (get filtered 0) :v (get filtered 1))
-            (sorted-map :w 0.0 :u (get filtered 0) :v (get filtered 1)))
+            (sorted-map :w (read-string (get filtered 2))
+            :u (read-string (get filtered 0))
+            :v (read-string (get filtered 1)))
+            (sorted-map :w 0.0
+            :u (read-string (get filtered 0))
+            :v (read-string (get filtered 1))))
           ))
 
         ; :normals
@@ -44,7 +54,9 @@
           (def lineparse (clojure.string/split line #" "))
           (def filtered (into [] (remove #{"vn"} lineparse)))
           (swap! normals_ conj
-            (sorted-map :x (get filtered 0) :y (get filtered 1) :z (get filtered 2))
+            (sorted-map :x (read-string (get filtered 0))
+            :y (read-string (get filtered 1))
+            :z (read-string (get filtered 2)))
           ))
 
         ; :faces
@@ -54,16 +66,16 @@
           (swap! faces_ conj
           (sorted-map :elements
             (into []
-            (for [x [0 1 2]]          
+            (for [x [0 1 2]]
                 (sorted-map :vertex (if (clojure.string/blank? (get (clojure.string/split (get filtered x) #"/") 0))
                                       nil
-                                      (get (clojure.string/split (get filtered x) #"/") 0))
+                                      (read-string (get (clojure.string/split (get filtered x) #"/") 0)))
                             :texture-coord (if (clojure.string/blank? (get (clojure.string/split (get filtered x) #"/") 1))
                                               nil
-                                              (get (clojure.string/split (get filtered x) #"/") 1))
+                                              (read-string (get (clojure.string/split (get filtered x) #"/") 1)))
                             :normal (if (clojure.string/blank? (get (clojure.string/split (get filtered x) #"/") 2))
                                       nil
-                                      (get (clojure.string/split (get filtered x) #"/") 2)))))
+                                      (read-string (get (clojure.string/split (get filtered x) #"/") 2))))))
           ))))
 
         ; build and pprint output.
