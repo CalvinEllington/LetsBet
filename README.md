@@ -1,3 +1,5 @@
+### This project was my brief experience with trying my hand at using clojure as a language.
+
 # letsbet
 
 Clojure challenge for letsbet
